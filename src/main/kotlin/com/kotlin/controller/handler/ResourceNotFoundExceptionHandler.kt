@@ -1,7 +1,7 @@
-package com.KotlinMicronaut.advice.handler
+package com.kotlin.controller.handler.handler
 
-import com.KotlinMicronaut.advice.ControlError
-import com.KotlinMicronaut.service.exceptions.ResourceNotFoundException
+import com.kotlin.controller.handler.ControlError
+import com.kotlin.service.exceptions.ResourceNotFoundException
 import io.micronaut.context.annotation.Requires
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse

@@ -1,4 +1,4 @@
-package com.KotlinMicronaut.service.exceptions
+package com.kotlin.service.exceptions
 
 import java.lang.RuntimeException
 

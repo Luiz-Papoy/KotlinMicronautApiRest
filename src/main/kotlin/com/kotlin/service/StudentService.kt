@@ -1,6 +1,6 @@
-package com.KotlinMicronaut.service
+package com.kotlin.service
 
-import com.KotlinMicronaut.model.Student
+import com.kotlin.model.Student
 import javax.inject.Singleton
 
 @Singleton

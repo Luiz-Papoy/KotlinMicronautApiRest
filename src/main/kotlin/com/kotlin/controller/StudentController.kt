@@ -1,7 +1,7 @@
-package com.KotlinMicronaut.controller
+package com.kotlin.controller
 
-import com.KotlinMicronaut.model.Student
-import com.KotlinMicronaut.service.StudentService
+import com.kotlin.model.Student
+import com.kotlin.service.StudentService
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
@@ -27,4 +27,5 @@ class StudentController(private val studentService: StudentService) {
             else -> {HttpResponse.ok(obj)}
         }
     }
+
 }

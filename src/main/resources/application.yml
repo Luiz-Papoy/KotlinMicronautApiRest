@@ -2,19 +2,22 @@ micronaut:
   server:
     port: 8081
   application:
-    name: kotlinMicronaut
+    name: kotlin-micronaut
 datasources:
   default:
-    url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:devDb
     driverClassName: org.h2.Driver
     username: sa
-    password: ''
-    schema-generate: CREATE_DROP
+    password: ""
     dialect: H2
+
 jpa:
   default:
+    entity-scan:
+      packages: 'com.kotlin.model'
     properties:
       hibernate:
         hbm2ddl:
           auto: update
-
+        show_sql: true
+        format_sql: true

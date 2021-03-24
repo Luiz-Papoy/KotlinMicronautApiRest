@@ -1,7 +1,7 @@
-package com.KotlinMicronaut.advice.handler
+package com.kotlin.controller.handler.handler
 
-import com.KotlinMicronaut.advice.ControlError
-import com.KotlinMicronaut.service.exceptions.DatabaseException
+import com.kotlin.controller.handler.ControlError
+import com.kotlin.service.exceptions.DatabaseException
 import io.micronaut.context.annotation.Requires
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
@@ -11,7 +11,6 @@ import io.micronaut.http.server.exceptions.ExceptionHandler
 
 import java.time.Instant
 import javax.inject.Singleton
-
 
 @Produces
 @Singleton

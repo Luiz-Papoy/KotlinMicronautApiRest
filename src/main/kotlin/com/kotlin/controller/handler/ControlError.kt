@@ -1,7 +1,6 @@
-package com.KotlinMicronaut.advice
+package com.kotlin.controller.handler
 
 import com.fasterxml.jackson.annotation.JsonFormat
-import java.io.Serializable
 import java.time.Instant
 
 data class ControlError(
@@ -12,4 +11,4 @@ data class ControlError(
      var error: String,
      var message: String,
      var path: String?
-): Serializable {}
+)
