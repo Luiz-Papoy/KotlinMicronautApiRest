@@ -10,6 +10,6 @@ interface StudentService {
     fun findAllStudent(): List<Student>
     fun findStudentById(id: Long): Student?
     fun deleteStudentById(id: Long)
-    fun updateStudanteById(student: Student, id: Long)
+    fun updateStudentByid(name: String, email: String, cpf: String, ra: String, id: Long): Student
 
 }

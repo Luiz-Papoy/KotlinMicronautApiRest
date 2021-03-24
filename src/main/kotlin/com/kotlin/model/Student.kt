@@ -1,24 +1,24 @@
 package com.kotlin.model
 
 import javax.persistence.*
-import javax.validation.constraints.NotNull
+
 
 @Entity
 data class Student(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    var id: Long? = 0,
 
     @Column(name = "name")
-    var name: String = "",
+    val name: String = "",
 
     @Column(name = "email")
-    var email: String = "",
+    val email: String = "",
 
     @Column(name = "cpf")
-    var cpf: String = "",
+    val cpf: String = "",
 
     @Column(name = "ra")
-    var ra: String = ""
+    val ra: String = ""
 )
 
