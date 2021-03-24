@@ -10,17 +10,20 @@ import io.micronaut.http.annotation.Produces
 import io.micronaut.http.server.exceptions.ExceptionHandler
 
 import java.time.Instant
+import java.util.*
 import javax.inject.Singleton
+
 
 @Produces
 @Singleton
 @Requires(classes = [DatabaseException::class, ControlError::class])
-class DataBaseExceptionHandler: ExceptionHandler<DatabaseException?, HttpResponse<*>> {
+class DataBaseExceptionHandler : ExceptionHandler<DatabaseException?, HttpResponse<*>> {
+
 
     override fun handle(request: HttpRequest<*>?, exception: DatabaseException?): HttpResponse<*> {
-        val error : HttpStatus = HttpStatus.BAD_REQUEST
+        val error: HttpStatus = HttpStatus.BAD_REQUEST
         val message = "Database Integrity error!"
-        val dataBaseIntegrityError = ControlError(Instant.now(),400,error.toString(), message, request?.uri.toString() )
+        val dataBaseIntegrityError = ControlError(400, error.toString(), message, request?.uri.toString())
         return HttpResponse.badRequest(dataBaseIntegrityError)
     }
 }

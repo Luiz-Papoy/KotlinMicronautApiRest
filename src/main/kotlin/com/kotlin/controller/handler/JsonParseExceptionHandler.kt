@@ -10,18 +10,19 @@ import io.micronaut.http.annotation.Produces
 import io.micronaut.http.server.exceptions.ExceptionHandler
 
 import java.time.Instant
+import java.util.*
 import javax.inject.Singleton
 
 
 @Produces
 @Singleton
 @Requires(classes = [JsonParseException::class, ControlError::class])
-class JsonParseExceptionHandler: ExceptionHandler<JsonParseException?, HttpResponse<*>> {
+class JsonParseExceptionHandler : ExceptionHandler<JsonParseException?, HttpResponse<*>> {
 
     override fun handle(request: HttpRequest<*>?, exception: JsonParseException?): HttpResponse<*> {
-        val error : HttpStatus = HttpStatus.BAD_REQUEST
+        val error: HttpStatus = HttpStatus.BAD_REQUEST
         val message = "Json Error!"
-        val jsonParseError = ControlError(Instant.now(),400,error.toString(), message, request?.uri.toString() )
+        val jsonParseError = ControlError(400, error.toString(), message, request?.uri.toString())
         return HttpResponse.badRequest(jsonParseError)
     }
 }

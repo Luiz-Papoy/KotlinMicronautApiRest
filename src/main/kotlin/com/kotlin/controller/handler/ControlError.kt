@@ -3,11 +3,15 @@ package com.kotlin.controller.handler
 import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.Instant
 
-data class ControlError(
-     val timestamp: Instant,
+import java.text.SimpleDateFormat
 
-     val status: Int,
-     val error: String,
-     val message: String,
-     val path: String?
+import java.text.DateFormat
+import java.util.*
+
+
+data class ControlError(
+    val status: Int = 0,
+    val error: String = "",
+    val message: String = "",
+    val path: String? = ""
 )

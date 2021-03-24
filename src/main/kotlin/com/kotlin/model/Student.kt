@@ -1,6 +1,7 @@
 package com.kotlin.model
 
 import javax.persistence.*
+import javax.validation.constraints.NotNull
 
 @Entity
 data class Student(
@@ -8,16 +9,16 @@ data class Student(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
-    @Column(name = "Name")
-    val name: String = "",
+    @Column(name = "name")
+    var name: String = "",
 
-    @Column(name = "Email")
-    val email: String = "",
+    @Column(name = "email")
+    var email: String = "",
 
-    @Column(name = "Cpf")
-    val cpf: String = "",
+    @Column(name = "cpf")
+    var cpf: String = "",
 
-    @Column(name = "Ra")
-    val ra: String = ""
+    @Column(name = "ra")
+    var ra: String = ""
 )
 

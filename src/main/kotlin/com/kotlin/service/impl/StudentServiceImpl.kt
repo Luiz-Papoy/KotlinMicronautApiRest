@@ -30,7 +30,26 @@ class StudentServiceImpl(private val studentRepository: StudentRepository): Stud
             throw ResourceNotFoundException(id.toString())
         }
     }
+
+    override fun updateStudanteById(student: Student, id: Long) {
+        try{
+            val findedStudent = this.findStudentById(id)
+            updateData(findedStudent,student)
+        }catch(e: RuntimeException){
+            throw ResourceNotFoundException(id.toString())
+        }
     }
+
+
+
+
+    fun updateData(oldStudentData: Student, newStudentData: Student ){
+        oldStudentData.name = newStudentData.name
+        oldStudentData.email = newStudentData.email
+        oldStudentData.cpf = newStudentData.cpf
+        oldStudentData.ra = newStudentData.ra
+    }
+}
 
 
 
