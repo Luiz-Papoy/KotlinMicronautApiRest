@@ -11,6 +11,7 @@ datasources:
     password: ""
     dialect: H2
 
+
 jpa:
   default:
     entity-scan:

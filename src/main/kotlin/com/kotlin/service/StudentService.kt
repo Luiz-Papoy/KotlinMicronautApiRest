@@ -6,7 +6,10 @@ import javax.inject.Singleton
 @Singleton
 interface StudentService {
 
+    fun createStudent(student: Student)
     fun findAllStudent():List<Student>
     fun findStudentById(id: Long): Student?
+    fun deleteStudentById(id: Long)
+    fun updateStudanteById(Student: Student, id: Long)
 
 }
