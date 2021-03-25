@@ -2,15 +2,11 @@ package com.kotlin.controller
 
 import com.kotlin.model.Student
 import com.kotlin.service.StudentService
-import io.micronaut.context.annotation.Parameter
 import io.micronaut.http.HttpResponse
-import io.micronaut.http.HttpStatus
 import io.micronaut.http.annotation.*
-import io.micronaut.validation.Validated
-import javax.validation.Valid
 
 
-@Controller("/students")
+@Controller("/api/students")
 class StudentController(private val studentService: StudentService) {
 
     @Post
@@ -71,8 +67,12 @@ class StudentController(private val studentService: StudentService) {
     }
 
     @Put("/{id}")
-    fun updateStudant(@Body student: Student, @PathVariable id: Long): HttpResponse<Student> {
-        val newStudent = studentService.updateStudentByid(student.name, student.email, student.cpf, student.ra, id)
-        return HttpResponse.ok(newStudent)
+    fun updateStudant(@Body student: Student, @PathVariable id: Long): HttpResponse<Unit> {
+        if (this.studentService.findStudentById(id) != null) {
+            studentService.updateStudentById(student, id)
+            return HttpResponse.ok()
+        }
+        return HttpResponse.notFound()
     }
+
 }

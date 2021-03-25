@@ -5,6 +5,7 @@ import com.kotlin.repository.StudentRepository
 import com.kotlin.service.StudentService
 import com.kotlin.service.exceptions.ResourceNotFoundException
 import java.lang.RuntimeException
+import java.util.*
 import javax.inject.Singleton
 
 
@@ -31,13 +32,12 @@ class StudentServiceImpl(private val studentRepository: StudentRepository) : Stu
         }
     }
 
-    override fun updateStudentByid(name: String, email: String, cpf: String, ra: String, id: Long): Student {
-        if (studentRepository.findById(id) == null) {
-            throw ResourceNotFoundException(id.toString())
-        }
-        return studentRepository.updateStudentByid(name, email, cpf, ra, id)
-    }
+    override fun updateStudentById(student: Student, id: Long) {
+        studentRepository.deleteById(id)
+        val newStudent = Student(id, student.name, student.email, student.cpf, student.ra)
+        studentRepository.save(newStudent)
 
+    }
 }
 
 

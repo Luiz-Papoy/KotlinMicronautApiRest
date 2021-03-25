@@ -1,6 +1,7 @@
 package com.kotlin.service
 
 import com.kotlin.model.Student
+import java.util.*
 import javax.inject.Singleton
 
 @Singleton
@@ -10,6 +11,6 @@ interface StudentService {
     fun findAllStudent(): List<Student>
     fun findStudentById(id: Long): Student?
     fun deleteStudentById(id: Long)
-    fun updateStudentByid(name: String, email: String, cpf: String, ra: String, id: Long): Student
+    fun updateStudentById(student: Student, id: Long)
 
 }
