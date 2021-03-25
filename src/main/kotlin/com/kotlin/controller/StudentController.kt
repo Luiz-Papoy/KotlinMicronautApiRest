@@ -67,10 +67,10 @@ class StudentController(private val studentService: StudentService) {
     }
 
     @Put("/{id}")
-    fun updateStudant(@Body student: Student, @PathVariable id: Long): HttpResponse<Unit> {
-        if (this.studentService.findStudentById(id) != null) {
+    fun updateStudant(@Body student: Student, @PathVariable id: Long): HttpResponse<Student> {
+        if(studentService.findStudentById(id) != null){
             studentService.updateStudentById(student, id)
-            return HttpResponse.ok()
+            return HttpResponse.ok(student)
         }
         return HttpResponse.notFound()
     }
