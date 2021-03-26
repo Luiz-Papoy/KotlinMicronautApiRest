@@ -21,6 +21,12 @@ class StudentController(private val studentService: StudentService) {
         return HttpResponse.ok(listOfStudents)
     }
 
+    @Get("/sort")
+    fun findAllStudentSort(): HttpResponse<List<Student>> {
+        val listOfStudents = studentService.findAllStudent()
+        return HttpResponse.ok(listOfStudents)
+    }
+
     @Get("/{id}")
     fun findStudentById(@PathVariable id: Long): HttpResponse<Student> {
         val obj = studentService.findStudentById(id)
@@ -68,11 +74,9 @@ class StudentController(private val studentService: StudentService) {
 
     @Put("/{id}")
     fun updateStudant(@Body student: Student, @PathVariable id: Long): HttpResponse<Student> {
-        if(studentService.findStudentById(id) != null){
-            studentService.updateStudentById(student, id)
-            return HttpResponse.ok(student)
-        }
-        return HttpResponse.notFound()
+        studentService.updateStudentById(student, id)
+        return HttpResponse.ok(student)
+
     }
 
 }
