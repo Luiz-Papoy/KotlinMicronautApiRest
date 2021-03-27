@@ -10,9 +10,9 @@ import io.micronaut.http.annotation.*
 class StudentController(private val studentService: StudentService) {
 
     @Post
-    fun createStudent(@Body student: Student): HttpResponse<Unit> {
+    fun createStudent(@Body student: Student): HttpResponse<Student> {
         studentService.createStudent(student)
-        return HttpResponse.created(Unit)
+        return HttpResponse.created(student)
     }
 
     @Get
@@ -75,7 +75,7 @@ class StudentController(private val studentService: StudentService) {
     @Put("/{id}")
     fun updateStudant(@Body student: Student, @PathVariable id: Long): HttpResponse<Student> {
         studentService.updateStudentById(student, id)
-        return HttpResponse.ok(student)
+        return HttpResponse.ok()
 
     }
 
