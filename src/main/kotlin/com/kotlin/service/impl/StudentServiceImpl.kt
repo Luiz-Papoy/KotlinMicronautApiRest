@@ -1,23 +1,37 @@
 package com.kotlin.service.impl
 
 
+import com.kotlin.controller.handler.handler.PersistenceExceptionHandler
 import com.kotlin.model.Student
 import com.kotlin.repository.StudentRepository
 import com.kotlin.service.StudentService
+import com.kotlin.service.exceptions.DatabaseException
+import com.kotlin.service.exceptions.DatabasePersistenceException
 import com.kotlin.service.exceptions.ResourceNotFoundException
+import io.micronaut.data.annotation.Id
+import io.micronaut.data.model.Pageable
 import java.lang.RuntimeException
+import java.util.*
 import javax.inject.Singleton
+import javax.persistence.PersistenceException
 
 
 @Singleton
 class StudentServiceImpl(private val studentRepository: StudentRepository) : StudentService {
 
-    override fun createStudent(student: Student) {
-        this.studentRepository.save(student)
+    override fun createStudent(student: Student): Student {
+        try{
+            return this.studentRepository.save(student)
+        }catch (e: PersistenceException){
+            throw DatabasePersistenceException("")
+        }
+
     }
 
     override fun findAllStudent(): List<Student> {
+        //return studentRepository.findAll(Pageable.from(0, 5)).toList()
         return studentRepository.findAll().toList()
+
     }
 
     override fun findStudentById(id: Long): Student {
@@ -26,31 +40,20 @@ class StudentServiceImpl(private val studentRepository: StudentRepository) : Stu
 
     override fun deleteStudentById(id: Long) {
         try {
-            studentRepository.deleteById(id)
+
         } catch (e: RuntimeException) {
             throw ResourceNotFoundException(id.toString())
         }
     }
 
-    override fun updateStudentById(student: Student, id: Long): Student {
-        try {
-            val newStudent = studentRepository.findById(id).get()
-            updateData(newStudent, student)
-            return newStudent
-        } catch (e: ResourceNotFoundException) {
-            throw ResourceNotFoundException(id.toString())
+    override fun updateStudentById(student: Student, @Id id: Long): Student {
+        val entity: Student
+        if (student.id != null && studentRepository.existsById(id)) {
+            entity = studentRepository.update(student)
+            return entity
         }
-
-    }
-
-    fun updateData(baseStudent: Student, incomingStudent: Student) {
-        baseStudent.name = incomingStudent.name
-        baseStudent.email = incomingStudent.email
-        baseStudent.cpf = incomingStudent.cpf
-        baseStudent.ra = incomingStudent.ra
+        throw ResourceNotFoundException(id.toString())
     }
 
 }
-
-
 

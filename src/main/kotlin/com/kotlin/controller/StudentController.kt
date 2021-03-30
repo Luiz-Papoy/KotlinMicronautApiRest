@@ -10,13 +10,19 @@ import io.micronaut.http.annotation.*
 class StudentController(private val studentService: StudentService) {
 
     @Post
-    fun createStudent(@Body student: Student): HttpResponse<Unit> {
+    fun createStudent(@Body student: Student): HttpResponse<Student> {
         studentService.createStudent(student)
-        return HttpResponse.created(Unit)
+        return HttpResponse.created(student)
     }
 
     @Get
     fun findAllStudent(): HttpResponse<List<Student>> {
+        val listOfStudents = studentService.findAllStudent()
+        return HttpResponse.ok(listOfStudents)
+    }
+
+    @Get("/sort")
+    fun findAllStudentSort(): HttpResponse<List<Student>> {
         val listOfStudents = studentService.findAllStudent()
         return HttpResponse.ok(listOfStudents)
     }
@@ -68,11 +74,9 @@ class StudentController(private val studentService: StudentService) {
 
     @Put("/{id}")
     fun updateStudant(@Body student: Student, @PathVariable id: Long): HttpResponse<Student> {
-        if(studentService.findStudentById(id) != null){
-            studentService.updateStudentById(student, id)
-            return HttpResponse.ok(student)
-        }
-        return HttpResponse.notFound()
+        studentService.updateStudentById(student, id)
+        return HttpResponse.ok()
+
     }
 
 }

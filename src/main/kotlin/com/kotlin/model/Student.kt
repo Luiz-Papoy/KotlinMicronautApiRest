@@ -1,16 +1,19 @@
 package com.kotlin.model
 
+import io.micronaut.core.annotation.Introspected
 import javax.persistence.*
 
 
 @Entity
+@Introspected
 data class Student(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = 0,
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    var id: Long? = null,
     var name: String = "",
     var email: String = "",
     var cpf: String = "",
+    @Column(unique = true)
     var ra: String = ""
 )
 
