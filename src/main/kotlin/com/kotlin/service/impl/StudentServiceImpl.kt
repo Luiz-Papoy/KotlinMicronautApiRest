@@ -1,23 +1,31 @@
 package com.kotlin.service.impl
 
 
+import com.kotlin.controller.handler.handler.PersistenceExceptionHandler
 import com.kotlin.model.Student
 import com.kotlin.repository.StudentRepository
 import com.kotlin.service.StudentService
 import com.kotlin.service.exceptions.DatabaseException
+import com.kotlin.service.exceptions.DatabasePersistenceException
 import com.kotlin.service.exceptions.ResourceNotFoundException
 import io.micronaut.data.annotation.Id
 import io.micronaut.data.model.Pageable
 import java.lang.RuntimeException
 import java.util.*
 import javax.inject.Singleton
+import javax.persistence.PersistenceException
 
 
 @Singleton
 class StudentServiceImpl(private val studentRepository: StudentRepository) : StudentService {
 
     override fun createStudent(student: Student): Student {
-        return this.studentRepository.save(student)
+        try{
+            return this.studentRepository.save(student)
+        }catch (e: PersistenceException){
+            throw DatabasePersistenceException("")
+        }
+
     }
 
     override fun findAllStudent(): List<Student> {
@@ -32,7 +40,7 @@ class StudentServiceImpl(private val studentRepository: StudentRepository) : Stu
 
     override fun deleteStudentById(id: Long) {
         try {
-            studentRepository.deleteById(id)
+
         } catch (e: RuntimeException) {
             throw ResourceNotFoundException(id.toString())
         }
@@ -45,13 +53,6 @@ class StudentServiceImpl(private val studentRepository: StudentRepository) : Stu
             return entity
         }
         throw ResourceNotFoundException(id.toString())
-    }
-
-    fun updateData(baseStudent: Student, incomingStudent: Student) {
-        baseStudent.name = incomingStudent.name
-        baseStudent.email = incomingStudent.email
-        baseStudent.cpf = incomingStudent.cpf
-        baseStudent.ra = incomingStudent.ra
     }
 
 }
