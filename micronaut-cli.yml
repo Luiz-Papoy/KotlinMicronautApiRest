@@ -1,5 +1,5 @@
 applicationType: default
-defaultPackage: com.KotlinMicronaut
+defaultPackage: com.kotlin
 testFramework: junit
 sourceLanguage: kotlin
 buildTool: gradle

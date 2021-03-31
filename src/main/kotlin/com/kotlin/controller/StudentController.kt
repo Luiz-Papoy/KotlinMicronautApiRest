@@ -11,8 +11,8 @@ class StudentController(private val studentService: StudentService) {
 
     @Post
     fun createStudent(@Body student: Student): HttpResponse<Student> {
-        studentService.createStudent(student)
-        return HttpResponse.created(student)
+        val result = studentService.createStudent(student)
+        return HttpResponse.created(result)
     }
 
     @Get
