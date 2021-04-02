@@ -20,9 +20,9 @@ import javax.persistence.PersistenceException
 class StudentServiceImpl(private val studentRepository: StudentRepository) : StudentService {
 
     override fun createStudent(student: Student): Student {
-        try{
+        try {
             return this.studentRepository.save(student)
-        }catch (e: PersistenceException){
+        } catch (e: PersistenceException) {
             throw DatabasePersistenceException("")
         }
 
@@ -39,11 +39,10 @@ class StudentServiceImpl(private val studentRepository: StudentRepository) : Stu
     }
 
     override fun deleteStudentById(id: Long) {
-        try {
-
-        } catch (e: RuntimeException) {
+        if (!studentRepository.existsById(id)) {
             throw ResourceNotFoundException(id.toString())
         }
+        studentRepository.deleteById(id)
     }
 
     override fun updateStudentById(student: Student, @Id id: Long): Student {
