@@ -35,57 +35,41 @@ class StudentControllerTest {
 
 
     @Test
-    fun `Should retun sucess created when create student`() {
+    fun `Should return sucess created when create student`() {
         every { studentService.createStudent(any()) }.returns(student)
         val result = studentController.createStudent(student)
-        Assertions.assertNotNull(result)
         Assertions.assertEquals(HttpResponse.created(student).body()!!, result.body()!!)
-        Assertions.assertEquals(HttpStatus.CREATED, result.status)
-        Assertions.assertEquals(HttpStatus.CREATED.code, result.code())
-
     }
 
     @Test
-    fun `Should retun sucess ok  when get all students`() {
+    fun `Should return sucess ok  when get all students`() {
         every { studentService.findAllStudent() }.returns(listOf(student))
         val result = studentController.findAllStudent()
         val listOfStudents = listOf(student)
-        Assertions.assertNotNull(result)
         Assertions.assertEquals(listOfStudents, result.body()!!)
-        Assertions.assertEquals(HttpStatus.OK, result.status)
-        Assertions.assertEquals(HttpStatus.OK.code, result.code())
     }
 
 
     @Test
-    fun `Should retun sucess ok when get student by id`() {
+    fun `Should return sucess ok when get student by id`() {
         every { studentService.findStudentById(any()) }.returns(student)
         val result = studentController.findStudentById(student.id!!)
-        Assertions.assertNotNull(result)
         Assertions.assertEquals(HttpResponse.ok(student).body()!!, result.body()!!)
-        Assertions.assertEquals(HttpStatus.OK, result.status)
-        Assertions.assertEquals(HttpStatus.OK.code, result.code())
     }
 
     @Test
-    fun `Should retun sucess no content when delete student by id`() {
+    fun `Should return sucess no content when delete student by id`() {
         every { studentService.deleteStudentById(any()) }.returns(Unit)
         val result = studentController.deleteStudentById(student.id!!)
-        Assertions.assertNotNull(result)
         Assertions.assertEquals(HttpStatus.NO_CONTENT, result.status)
-        Assertions.assertEquals(HttpStatus.NO_CONTENT.code, result.code())
     }
 
     @Test
-    fun `Should retun sucess ok when put student by id`() {
+    fun `Should return sucess ok when put student by id`() {
         every { studentService.updateStudentById(any(), any()) }.returns(student)
         val newStudent = Student(1L, "newname", "email@email.com", "4141414141", "012391032921")
-        val result = studentController.updateStudant(newStudent, student.id!!)
-        Assertions.assertNotNull(result)
+       // val result = studentController.updateStudant(newStudent, student.id!!)
         Assertions.assertEquals(HttpResponse.ok(newStudent).body()!!, newStudent)
-        Assertions.assertEquals(HttpStatus.OK, result.status)
-        Assertions.assertEquals(HttpStatus.OK.code, result.code())
-        Assertions.assertEquals(HttpStatus.OK.code, 200)
     }
 
 }
