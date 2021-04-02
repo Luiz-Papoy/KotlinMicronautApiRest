@@ -9,7 +9,7 @@ import javax.persistence.*
 data class Student(
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    var id: Long? = null,
+    var id: Long? = 0,
     var name: String = "",
     var email: String = "",
     var cpf: String = "",
