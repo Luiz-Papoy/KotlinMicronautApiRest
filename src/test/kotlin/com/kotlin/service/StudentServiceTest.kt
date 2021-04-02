@@ -40,7 +40,7 @@ class StudentServiceTest {
 
     @Test
     fun `Should return sucess ok when find student by id`() {
-        every { studentRepository.findById(any()) }.returns(Optional.of(student))
+        every { studentRepository.findById(any()) }.returns(Optional.ofNullable(student))
         val result = studentService.findStudentById(student.id!!)
         Assertions.assertEquals(student,result)
     }

@@ -47,7 +47,7 @@ class StudentServiceImpl(private val studentRepository: StudentRepository) : Stu
 
     override fun updateStudentById(student: Student, @Id id: Long): Student {
         val entity: Student
-        if (student.id != null && studentRepository.existsById(id)) {
+        if (studentRepository.existsById(id)) {
             entity = studentRepository.update(student)
             return entity
         }
